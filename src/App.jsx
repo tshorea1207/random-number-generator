@@ -131,9 +131,9 @@ function NumberGrid({ pool, usedSet, current, onTap, rolling }) {
                 {isCurrent && (
                   <div style={{
                     position: "absolute", inset: 3, borderRadius: 6,
-                    border: "1.5px solid rgba(165,180,252,0.6)",
-                    boxShadow: "0 0 12px rgba(99,102,241,0.5)",
-                    animation: "pulse-ring 1.2s ease-in-out infinite",
+                    border: `1.5px solid rgba(165,180,252,${rolling ? 0.9 : 0.6})`,
+                    boxShadow: rolling ? "0 0 18px rgba(99,102,241,0.75)" : "0 0 12px rgba(99,102,241,0.5)",
+                    animation: rolling ? "none" : "pulse-ring 1.2s ease-in-out infinite",
                     pointerEvents: "none",
                   }} />
                 )}
@@ -305,7 +305,7 @@ export default function App() {
 
   const available = excludePrev ? pool.filter((n) => !usedSet.has(n)) : pool;
   const exhausted  = excludePrev && available.length === 0;
-  const gridCurrent = rolling ? null : result;
+  const gridCurrent = result;
 
   return (
     <>
